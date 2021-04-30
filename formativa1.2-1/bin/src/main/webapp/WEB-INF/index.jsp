@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,42 +15,48 @@
 <body>
     <div class="container">
         <div class="row class col-lg-6">
-            <form class="form-row" action="/formulario" method="POST" >
+            <form class="form-row">
             <table class="table table-borderless " >
 
             <tbody >
                 <tr style="background-color:#EAE4E3">
                     <td class="col-lg-1"><label for="name" >Nombre</label></td>
-                    <td class="col-lg-2"><input type="text" id="name" name="name" class="form-control input-sm " placeholder=""></td>
-                    <td class="col-lg-1"><span style="color:red"> <c:out value="${alertaNombre}"></c:out> </span></td>
+                    <td class="col-lg-2"><input type="text" id="name" class="form-control input-sm " placeholder=""></td>
+                    <td class="col-lg-1"></td>
                 </tr>
                 <tr >
                     <td class="col-lg-1">  <label for="lastname">Apellido</label> </td>
-                    <td class="col-lg-2"><input type="text" id="lastname" name="lastname" class="form-control input-sm " placeholder=""></td>
-                    <td class="col-lg-1"><span style="color:red"> <c:out value="${alertaApellido}"></c:out> </span></td>
+                    <td class="col-lg-2"><input type="text" id="lastname" class="form-control input-sm " placeholder=""></td>
+                    <td class="col-lg-1"></td>
                 </tr>
                 <tr  style="background-color:#EAE4E3">
                     <td class="col-lg-1">Límite</td>
-                    <td class="col-lg-2"><input type="text" id="limit" name="limit" class="form-control input-sm " placeholder=""></td>
-                    <td class="col-lg-1"><span style="color:red"> <c:out value="${alertaLimit}"></c:out> </span></td>
+                    <td class="col-lg-2"><input type="text" id="limit" class="form-control input-sm " placeholder=""></td>
+                    <td class="col-lg-1"></td>
                 </tr>
 
                     <tr >
                     <td class="col-lg-1">Código postal</td>
-                    <td class="col-lg-2"><input type="text" id="postalCode" name="postalCode" class="form-control input-sm " placeholder=""></td>
-                    <td class="col-lg-2"><span style="color:red"> <c:out value="${alertaPcode}"></c:out> </span></td>
+                    <td class="col-lg-2"><input type="text" id="postalCode" class="form-control input-sm " placeholder=""></td>
+                    <td class="col-lg-2"></td>
                     </tr>
                  
                     <tr>
                         <td></td>
-                        <td><button type="submit" class="btn btn-success">Enviar</button></td>
-                        <td> <span style="color:red"> <c:out value="${alertaGeneral}"></c:out> </span></td>
+                        <td> <button type="submit" class="btn btn-warning">Limpiar</button> <button type="submit" class="btn btn-success">Enviar</button></td>
                     </tr>
-      
             </tbody>
-            </table>
+
+
+
+
         </form>
         </div>
+         
+
     </div>
+   
+    
+</table>
 </body>
 </html>

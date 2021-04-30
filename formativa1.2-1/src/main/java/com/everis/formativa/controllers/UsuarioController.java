@@ -5,53 +5,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class UsuarioController {
-	    @RequestMapping("/")
-	    public String home(){
-	    	return "index.jsp";
-	    }
-	    
-	    @RequestMapping("/formulario")
-		public String formulario(@RequestParam(value="nombre") String name,
-				@RequestParam(value="pass") String lastname ,
-				@RequestParam(value="pass") int limit,
-				@RequestParam(value="pass") String postalCode,
+public class UsuarioController {	    
+	    @RequestMapping(value = "/formulario")
+		public String formulario(@RequestParam(value="name") String name,
+				@RequestParam(value="lastname") String lastname ,
+				@RequestParam(value="limit") String limit,
+				@RequestParam(value="postalCode") String postalCode,
 				Model model){
 				//System.out.println(nombre+" - "+pass);
+	    		//int largo = (int) (Math.log10(limit) + 1);
+
 		    	int validator=5;
-		    	if(name != "" && lastname != "" && postalCode != "" ){
+		    	if(name == "" || lastname == "" || postalCode == "" || limit == ""){
 		    		validator--;
-		    		return "<script>alert('Agregue un valor, no se aceptan campos nulos')<script>";
+		    		model.addAttribute("alertaGeneral", "Agregue un valor, no se aceptan campos nulos");
+		    		System.out.println("Agregue un valor, no se aceptan campos nulos");
+		    		return "index.jsp";
 		    	}
-		    	if(name.length() < 1  && name.length() > 10) {
-	    			// mostrar error
-		    		validator--;
-		    		return "<script>alert('Minimo de caracteres 1 y Maximo 10')<script>";
+		    	else {
+		  
+		    		if(name.length() < 1  || name.length() > 10) {
+		    			// mostrar error
+			    		validator--;
+			    		model.addAttribute("alertaNombre", "Minimo de caracteres 1 y Maximo 10");		    	}
+			    	if(lastname.length() < 1  || lastname.length() > 10) {
+					// mostrar error
+			    		validator--;
+			    		model.addAttribute("alertaApellido", "Minimo de caracteres 1 y Maximo 10");
+			    	}
+			    	if(Integer.parseInt(limit)<0 || limit.length()>6){
+			    		validator--;
+			    		model.addAttribute("alertaLimit","Limit debe ser positivo y no mayor a 6 digitos");
+			    	}
+			    	if(postalCode.length() !=8){
+			    		validator--;
+			    		model.addAttribute("alertaPcode","El codigo postal debe ser igual a 8");
+		
+			    	}
+			    	if (validator == 5) {
+			    		System.out.println(validator);
+			    		model.addAttribute("nombre", name);
+						model.addAttribute("apellido", lastname);
+						model.addAttribute("limit", limit);
+						model.addAttribute("postalCode", postalCode);
+						return "inicio.jsp";
+			    	}
 		    	}
-		    	if(lastname.length() < 1  && lastname.length() > 10) {
-				// mostrar error
-		    		validator--;
-		    		return "<script>alert('Minimo de caracteres 1 y Maximo 10')<script>";
-		    	}
-		    	if(limit<0 && Integer.toString(limit).length()>6){
-		    		validator--;
-		    		return "<script>alert('Limit debe ser positivo y no mayor a 6 digitos')<script>";
-		    	}
-		    	if(postalCode.length() == 8){
-		    		validator--;
-		    		return "<script>alert('El codigo postal debe tene 8 digitos')<script>";
-		    	}
-		    	if (validator == 5) {
-		    		model.addAttribute("nombre", name);
-					model.addAttribute("apellido", lastname);
-					model.addAttribute("limit", limit);
-					model.addAttribute("postalCode", postalCode);
-					return "inicio.jsp";
-		    	}
-				return  "index.jsp";
-		    	
+			    	
+		    	return "index.jsp";
 	    }
-	    	
-	    
+
+	    	    
 	    
 }
